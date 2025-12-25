@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Per Leggendaria - Buon Natale</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        body {
+            /* SFONDO FISSO */
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                        url('sfondo_Rane.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* CONTENITORE PER LO SCORRIMENTO */
+        .scroll-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Spazio sopra e sotto per liberare l'immagine delle rane */
+            padding-top: 85vh; 
+            padding-bottom: 85vh;
+        }
+
+        .snow-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* STILE LETTERA LEGGENDARIA */
+        .letter-container {
+            background-color: rgba(253, 252, 240, 0.9); /* Effetto carta trasparente */
+            width: 85%;
+            max-width: 500px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            position: relative;
+            transform: rotate(1deg);
+            border: 2px solid #d4af37; /* Bordo Oro */
+            backdrop-filter: blur(3px);
+            z-index: 5;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #2d5a27; /* Verde rana scuro */
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .dedica {
+            line-height: 1.8;
+            font-size: 1.1em;
+            text-align: center;
+            white-space: pre-line;
+            color: #333;
+        }
+
+        .firma {
+            margin-top: 30px;
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6em;
+            color: #b30000;
+        }
+
+        .frog-icon {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        /* Suggerimenti per lo scroll */
+        .hint {
+            color: white;
+            text-align: center;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,1);
+            animation: bounce 2s infinite;
+            background: rgba(45, 90, 39, 0.4); /* Sfumatura verde */
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+        }
+
+        @media (max-width: 600px) {
+            .letter-container { padding: 30px 20px; width: 90%; }
+            h1 { font-size: 2em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="snow-container" id="snow"></div>
+
+    <div class="scroll-wrapper">
+        <div class="hint">Scorri giù per la dedica... 📜</div>
+
+        <div class="letter-container">
+            <div class="frog-icon">🐸🎄</div>
+            <h1>Cara LEGGENDARIA,</h1>
+            
+            <div class="dedica">
+                Leggendaria Buon Nataleeeeee!!!
+                Ti voglio Beneee 
+
+                So che non è la stessa cosa che avere una lettera di carta, ma non sono bravo con i lavori a mano ahaha. 
+                
+                Grazie perché come ti dissi a Torino hai veramente un bel cuore, non cambiare mai e rimani sempre così, grazie perché con te è facile fare amicizia. 
+                
+                Ti voglio un mondo di bene ❤️
+            </div>
+
+            <div class="firma">
+                Buon Natale! <br>
+                King
+            </div>
+        </div>
+        
+        <div class="hint" style="margin-top: 60px;">Scorri su per vedere lo sfondo 🎄</div>
+    </div>
+
+    <script>
+        const snowContainer = document.getElementById('snow');
+        const snowflakeCount = 80;
+
+        for (let i = 0; i < snowflakeCount; i++) {
+            const flake = document.createElement('div');
+            const size = Math.random() * 6 + 2 + 'px';
+            
+            flake.style.position = 'absolute';
+            flake.style.width = size;
+            flake.style.height = size;
+            flake.style.background = 'white';
+            flake.style.borderRadius = '50%';
+            flake.style.opacity = Math.random();
+            flake.style.filter = 'blur(1px)'; 
+            flake.style.left = Math.random() * 100 + 'vw';
+            flake.style.top = '-5vh';
+            
+            const duration = Math.random() * 5 + 5;
+            const delay = Math.random() * -10;
+
+            flake.animate([
+                { transform: `translateY(0vh) translateX(0px)`, opacity: 0 },
+                { transform: `translateY(20vh) translateX(15px)`, opacity: 1 },
+                { transform: `translateY(100vh) translateX(-15px)`, opacity: 0.2 }
+            ], {
+                duration: duration * 1000,
+                iterations: Infinity,
+                delay: delay * 1000,
+                easing: 'linear'
+            });
+            
+            snowContainer.appendChild(flake);
+        }
+    </script>
+</body>
+</html>
